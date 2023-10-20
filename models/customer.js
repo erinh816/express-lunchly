@@ -66,14 +66,13 @@ class Customer {
                   phone,
                   notes
            FROM customers
-           WHERE first_name ILIKE '%${searchTerm}%'
-             OR last_name ILIKE '%${searchTerm}%'
+           WHERE CONCAT(first_name, ' ', last_name) ILIKE '%' || $1 || '%'
            ORDER BY last_name, first_name`,
+           [searchTerm]
     );
+    console.log("'%" + searchTerm + "%'");
     return results.rows.map(c => new Customer(c));
   }
-  //TODO:need to deal with sql injection for this
-  //TODO:can concat first last name
 
   /** get top 10 customers with the most reservation */
 

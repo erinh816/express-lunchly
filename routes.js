@@ -13,7 +13,14 @@ const router = new express.Router();
 /** Homepage: show list of customers. */
 
 router.get("/", async function (req, res, next) {
-  const customers = await Customer.all();
+  let customers;
+
+  if (req.query.search) {
+    customers = await Customer.search(req.query.search);
+  } else {
+    customers = await Customer.all();
+  }
+
   return res.render("customer_list.html", { customers });
 });
 
@@ -36,20 +43,12 @@ router.post("/add/", async function (req, res, next) {
   return res.redirect(`/${customer.id}/`);
 });
 
-/** Route for searching for customers. */
-
-router.get("/search/", async function (req, res, next) {
-  const customers = await Customer.search(req.query.search);
-  return res.render("customer_list.html", { customers });
-});
-
 /** Route for getting top 10 customers who have the most reservations */
 
 router.get("/top-ten/", async function (req, res, next) {
   const customers = await Customer.getTopCustomers();
   return res.render("customer_list.html", { customers });
 });
-//TODO:refactor above 2 routes to 1 route, add conditional in home route
 
 /** Show a customer, given their ID. */
 
