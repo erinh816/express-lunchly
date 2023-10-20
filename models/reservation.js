@@ -17,6 +17,18 @@ class Reservation {
     this.notes = notes;
   }
 
+  set numGuests(val) {
+    if (val < 1) {
+      throw new Error('you can not eat here');
+    } else {
+      this._numGuests = val;
+    }
+  }
+
+  get numGuests() {
+    return this._numGuests;
+  }
+
   /** formatter for startAt */
 
   getFormattedStartAt() {

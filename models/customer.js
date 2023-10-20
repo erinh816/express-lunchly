@@ -16,6 +16,18 @@ class Customer {
     this.notes = notes;
   }
 
+  set notes(val) {
+    if (!val) {
+      this._notes = '';
+    } else {
+      this._notes = val;
+    }
+  }
+
+  get notes() {
+    return this._notes;
+  }
+
   /** find all customers. */
 
   static async all() {
@@ -68,7 +80,7 @@ class Customer {
            FROM customers
            WHERE CONCAT(first_name, ' ', last_name) ILIKE '%' || $1 || '%'
            ORDER BY last_name, first_name`,
-           [searchTerm]
+      [searchTerm]
     );
     console.log("'%" + searchTerm + "%'");
     return results.rows.map(c => new Customer(c));
@@ -135,7 +147,7 @@ class Customer {
 
   /** return the fullname of the customer. */
 
-  fullName() {
+  get fullName() {
     return `${this.firstName} ${this.lastName}`;
   }
 
