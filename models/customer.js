@@ -66,8 +66,8 @@ class Customer {
                   phone,
                   notes
            FROM customers
-           WHERE LOWER(first_name) LIKE '%${searchTerm.toLowerCase()}%'
-             OR LOWER(last_name) LIKE '%${searchTerm.toLowerCase()}%'
+           WHERE first_name ILIKE '%${searchTerm}%'
+             OR last_name ILIKE '%${searchTerm}%'
            ORDER BY last_name, first_name`,
     );
     return results.rows.map(c => new Customer(c));
