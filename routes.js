@@ -43,6 +43,13 @@ router.get("/search/", async function (req, res, next) {
   return res.render("customer_list.html", { customers });
 });
 
+/** Route for getting top 10 customers who have the most reservations */
+
+router.get("/top-ten/", async function (req, res, next) {
+  const customers = await Customer.getTopCustomers();
+  return res.render("customer_list.html", { customers });
+});
+
 
 /** Show a customer, given their ID. */
 
