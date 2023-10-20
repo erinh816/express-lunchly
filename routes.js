@@ -49,7 +49,7 @@ router.get("/top-ten/", async function (req, res, next) {
   const customers = await Customer.getTopCustomers();
   return res.render("customer_list.html", { customers });
 });
-
+//TODO:refactor above 2 routes to 1 route, add conditional in home route
 
 /** Show a customer, given their ID. */
 

@@ -72,6 +72,8 @@ class Customer {
     );
     return results.rows.map(c => new Customer(c));
   }
+  //TODO:need to deal with sql injection for this
+  //TODO:can concat first last name
 
   /** get top 10 customers with the most reservation */
 
