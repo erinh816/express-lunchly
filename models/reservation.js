@@ -29,6 +29,30 @@ class Reservation {
     return this._numGuests;
   }
 
+  set startAt(val) {
+    if (!(val instanceof Date)) {
+      throw new Error("That's not a date!");
+    } else {
+      this._startAt = val;
+    }
+  }
+
+  get startAt() {
+    return this._startAt;
+  }
+
+  set customerId(val) {
+    if (this._customerId) {
+      throw new Error("Can't reassign a reservation to a new customer!");
+    } else {
+      this._customerId = val;
+    }
+  }
+
+  get customerId() {
+    return this._customerId;
+  }
+
   /** formatter for startAt */
 
   getFormattedStartAt() {
